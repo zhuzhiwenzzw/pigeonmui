@@ -1,0 +1,136 @@
+/**重置标签默认样式*/
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+        }
+        html,body{
+        	height: 100%;
+        	width: 100%;
+        }
+        
+        .mui-bar {
+			background-color: #acb3d7;
+			position: relative;
+		}
+
+
+   .mui-title{
+   	font-size: 20px;
+   	margin-left:40%;
+   }
+       
+        /*.header {
+            background: #000;
+            height: 40px;
+            color: #fff;
+            line-height: 34px;
+            font-size: 20px;
+            padding: 0 10px;
+        }*/
+        .footer {
+            width: 100%;
+            height: 10%;
+            background: #acb3d7;
+            position: absolute;
+            bottom: 0;
+            padding:0;
+        }
+        .footer input {
+            width: 60%;
+            height: 60%;
+            outline: none;
+            /*font-size: 20px;*/
+            /*text-indent: 3%;*/
+            position: absolute;
+            border-radius: 6px;
+            right: 20%;
+        }
+        .footer span {
+            display: inline-block;
+            width: 15%;
+            height: 60%;
+            background: #fff;
+            font-weight: 600;
+            line-height:270%;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            right: 3%;
+            border-radius: 6px;
+            ma
+        }
+        .footer span:hover {
+            color: #fff;
+            background: #bed9ea;
+        }
+        #user_face_icon {
+            display: inline-block;
+            background: #fff;
+            width: 13%;
+            height: 70%;
+            border-radius:50%;
+            position: absolute;
+            bottom: 15%;
+            left: 3%;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        img {
+            width: 15%;
+            
+        }
+        .content {
+            font-size: 20px;
+            width: 100%;
+            height:auto ;
+            overflow: auto;
+            /*padding: 5px;*/
+            /*background: #2AC845;*/
+        }
+        
+        /*最外围框*/
+        .content li {
+            margin: 3%;
+            /*padding-left: 50px;*/
+            /*width: 412px;*/
+            display: block;
+            clear: both;
+            overflow: hidden;
+             /*background: #FFF;*/
+        }
+        /*头像*/
+        .content li img {
+            float: left;
+            border: 50%;
+        }
+        /*文字内容 框*/
+        .content li span{
+            
+            padding: 3%;
+            border-radius: 10px;
+            float: left;
+            margin:2% ;
+            max-width: 70%;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 3px #ccc;
+        }
+        /*头像右边*/
+        .content li img.imgleft { 
+            float: left; 
+        }
+        /*头像左边*/
+        .content li img.imgright { 
+            float: right; 
+        }
+        /*文字框左边*/
+        .content li span.spanleft { 
+            float: left;
+            background: #fff;
+        }
+        /*文字  框  向右移动*/
+        .content li span.spanright { 
+            float: right;
+            background: #fff;
+        }

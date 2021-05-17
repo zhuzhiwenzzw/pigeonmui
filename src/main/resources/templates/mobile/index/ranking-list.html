@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/dd.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+	</head>
+	<body>
+		<div class="mui-content">	
+			<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #000000;"></a>
+			<h1 class="mui-title" style="font-size: 20px;">推荐项目</h1>
+		</header>
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+			
+      		<div class="mui-scroll">
+			<!--搜索框-->
+			
+			<div class="seek">
+				<div class="mui-input-row mui-search" id="searchForm">
+            		<input type="search" id="searchInput" onkeyup="enterSearch(event)" class="mui-input-clear" placeholder="输入热点内容">
+        		</div>
+			</div>
+			<!--<ul class="mui-table-view mui-table-view-chevron" id="list">    下拉刷新-->
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h2.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: red;font-size: 22px;">1&nbsp;</p>
+							医学生能硬核到什么程度？
+							<p class='mui-ellipsis'>归去来兮：每次老师的ppt都打不开...</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h1.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: red;font-size: 22px;">2&nbsp;</p>
+							如何看待药监局正式发布的"医美<br>面膜不合法"?
+							<p class='mui-ellipsis'>老爸评测：终于等来了药监局对所谓医美面膜的管束</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h4.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: orangered;font-size: 22px;">3&nbsp;</p>
+							如何看待药监局正式发布的"医美<br>面膜不合法"?
+							<p class='mui-ellipsis'>老爸评测：终于等来了药监局对所谓医美面膜的管束</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h5.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: orange;font-size: 22px;">4&nbsp;</p>
+							如何看待药监局正式发布的"医美<br>面膜不合法"?
+							<p class='mui-ellipsis'>老爸评测：终于等来了药监局对所谓医美面膜的管束</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h3.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: orange;font-size: 22px;">5&nbsp;</p>
+							如何看待首个国产HPV疫苗获<br>批上市"?
+							<p class='mui-ellipsis'>老爸评测：定价329元一支，在价格方面</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h2.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: sandybrown;font-size: 22px;">6&nbsp;</p>
+							如何看待首个国产HPV疫苗获<br>批上市"?
+							<p class='mui-ellipsis'>老爸评测：定价329元一支，在价格方面</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right" src="img/h2.jpg">
+						<div class="mui-media-body">
+							<p class="number" style="float: left; color: sandybrown;font-size: 22px;">7&nbsp;</p>
+							如何看待首个国产HPV疫苗获<br>批上市"?
+							<p class='mui-ellipsis'>老爸评测：定价329元一支，在价格方面</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		<!--	</ul>-->
+		</div>
+		</div>
+			
+			
+        	
+        	
+
+
+		</div>
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">       
+        	mui.init();
+			(function($) {
+　　				$(".mui-scroll-wrapper").scroll({
+　　　　			//bounce: false,//滚动条是否有弹力默认是true
+　　　　			//indicators: false, //是否显示滚动条,默认是true
+　　					});
+				})(mui);
+        
+        	// 搜索事件,获取搜索关键词
+       		 function enterSearch(event){
+            	if(event.keyCode == 13) {//用户点击回车的事件号为13
+               		var keyword = document.getElementById('searchInput').value;
+                	alert("搜索中...")
+            	}
+        	}
+       		 
+       		
+    </script>
+    
+    
+    
+    
+    <!--下拉刷新-->
+    
+    <!--<script type="text/javascript" charset="utf-8">
+   var pager = {};//分页
+   var totalPage;//总页码
+   pullRefresh(pager);//启用上拉下拉 
+   function pullRefresh(){
+      mui("#refreshContainer").pullRefresh({
+        up:{
+           contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+               contentnomore:'没 有 更 多 数 据 了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+           callback:function(){//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                 window.setTimeout(function(){
+             getData(pager);
+             },500);
+           }
+         },
+         down : {
+             height:50,//可选,默认50.触发下拉刷新拖动距离,
+             auto: true,//可选,默认false.首次加载自动下拉刷新一次
+             contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+             contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+             contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+             callback :function(){ //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                window.setTimeout(function(){
+                    pager['size']= 3;//条数
+                pager['page'] = 1;//页码      
+                //刷新要先清空父节点里面的子节点
+                var f = document.getElementById("list");
+                var childs = f.childNodes;
+                for(var i = childs.length - 1; i >= 0; i--) {
+                  f.removeChild(childs[i]);
+                }
+                getData(pager);
+                },500);
+              }
+            }
+        })
+    }
+   
+    function getData(params){
+        mui.ajax("/article/getArticlePage",{
+          data:{
+            "header":{"os":"wap","app":"xxxx","ver":1.0},
+            "data":params
+          },
+          dataType:'json',
+          type:'post',
+          headers:{'Content-Type':'application/json'},
+          success:function(data){
+                  mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+              //下面这坨都是在拼dom 你可以用jquery 或者是你所熟悉的angular,vue双向绑定
+              var returnData = data.data;
+              var element=document.getElementById("list");
+              var para;
+         　　　var node;
+              for(var i = 0; i<returnData.length;i++){
+                para = document.createElement("li");
+                node = document.createTextNode(returnData[i].article_title)
+                para.appendChild(node);
+                element.appendChild(para);
+              }
+               
+        　　　　//这里很重要，这里获取页码 公式：总条数/每页显示条数 （这里的处理是根据接口返回数据来做的处理 最下面有接口返回数据的格式）
+              totalPage = data.ext%pager.size!=0?parseInt(data.ext/pager.size)+1:data.ext/pager.size;
+              if(totalPage==pager.page){//总页码等于当前页码，停止上拉下拉
+             mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+              }else{
+            pager.page++;
+            mui('#refreshContainer').pullRefresh().refresh(true);
+              }          
+            },
+            error:function(xhr,type,errorThrown){
+            //异常处理；
+            console.log(type);
+            }
+         })
+        }  
+   </script>-->
+
+	
+		
+	</body>
+</html>

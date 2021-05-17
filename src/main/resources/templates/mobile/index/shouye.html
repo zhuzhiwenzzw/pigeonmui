@@ -1,0 +1,106 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<!--		<link th:href="@{css/mui.css}" rel="stylesheet" />-->
+		<script th:replace="common/head::static"></script>
+		<script th:src="@{/common/nprogress/nprogress.js}"></script>
+		<link rel='stylesheet' th:href="@{/common/nprogress/nprogress.css}"/>
+<!--		<link rel="stylesheet" th:href="@{/static/css/mui.css}"/>-->
+		<style type="text/css">
+			.div1{
+				width: 50px;
+				height: 50px;
+				/*background-color: red;*/
+				border-radius: 50%;
+				margin-top: -55px;
+				overflow: hidden;
+			}
+			div img{
+				width: 100%;
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+<!--		<script th:src="@{common/mui/js/mui.min.js}"></script>-->
+<!--		<script src="../../static/common/mui/js/mui.js"></script>-->
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<form class="mui-input-group">
+		<div class="mui-input-row mui-search">
+    		<input type="search" class="mui-input-clear" placeholder="搜索你想了解的信息">
+		</div>
+		</form>
+		<div style="height: 200px;width: 340px;border: 1px solid #CCCCCC;background-color: white;margin: auto;margin-top: 15px;border-radius: 8%;">
+			<div style="width: 70%;height: 60px;margin: auto;margin-top: 30px;">
+				<img src="/img/shouye.png"></div>
+			<p align="center" style="padding-top:20px ; font-size: 16px;font-weight: bold;">找寻你向往的旅游圣地！</p>
+			<div class="mui-button-row" style="padding-top: 15px;">
+				<a th:href="@{/index/userpg}" class="mui-btn" style="width: 130px;">开始吧</a>
+			</div>
+		</div>
+		<div style="margin-top: 20px;">
+			<p style="font-size: 18px;">你可能感兴趣的人：</p>
+		</div>
+		<div style="height: 280px;width:100%;margin: auto;margin-top: 30p;border: 1px solid #CCCCCC;background-color: white;">
+			<div th:each="user : ${users}" style="height: 70px;width:100%;margin: auto;margin-top: 30p;border: 1px solid #CCCCCC;background-color: white;">
+				<div style="margin-left: 55px;margin-top: 12px;">
+					<p style="font-size: 16px;font-weight: bold;" th:text="${user.nickname}">小苏打</p>
+					<p style="font-size: 10px;margin-top: -10px;" th:text="${user.information}">摄影类活跃用户</p>
+				</div>
+				<div class="div1"><img th:src="@{'/upload/'+${user.imgSrc}}"/></div>
+				<div><button th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/shouye/${user.id}'|}" id="hhh" style="border-radius: 40%; width: 65px; height: 38px;margin-left: 290px;margin-top:-37px" type="button" >查看</button></div>
+			</div>
+<!--			<div style="height: 70px;width:100%;margin: auto;margin-top: 30p;border: 1px solid #CCCCCC;background-color: white;">-->
+<!--				<div style="margin-left: 55px;margin-top: 12px;">-->
+<!--					<p style="font-size: 16px;font-weight: bold;">加小血</p>-->
+<!--					<p style="font-size: 10px;margin-top: -10px;">旅游攻略类活跃用户</p>	-->
+<!--				</div>-->
+<!--				<div class="div1"><img src="/img/2.jpg" alt="" /></div>-->
+<!--				<div><button id="hhh" onclick="aaa()" style="border-radius: 40%; width: 65px; height: 38px;margin-left: 290px;margin-top:-37px" type="button" >关注</button></div>-->
+<!--			</div>-->
+<!--			<div style="height: 70px;width:100%;margin: auto;margin-top: 30p;border: 1px solid #CCCCCC;background-color: white;">-->
+<!--				<div style="margin-left: 55px;margin-top: 12px;">-->
+<!--					<p style="font-size: 16px;font-weight: bold;">打个大西瓜66</p>-->
+<!--					<p style="font-size: 10px;margin-top: -10px;">运动休闲类活跃用户</p>	-->
+<!--				</div>-->
+<!--				<div class="div1"><img src="/img/3.jpg" alt="" /></div>-->
+<!--				<div><button id="hhh" onclick="aaa()" style="border-radius: 40%; width: 65px; height: 38px;margin-left: 290px;margin-top:-37px" type="button" >关注</button></div>-->
+<!--			</div>-->
+<!--			<div style="height: 70px;width:100%;margin: auto;margin-top: 30p;border: 1px solid #CCCCCC;background-color: white;">-->
+<!--				<div style="margin-left: 55px;margin-top: 12px;">-->
+<!--					<p style="font-size: 16px;font-weight: bold;">仰望这片天✈</p>-->
+<!--					<p style="font-size: 10px;margin-top: -10px;">生活类活跃用户</p>	-->
+<!--				</div>-->
+<!--				<div class="div1"><img src="/img/4.jpg" alt="" /></div>-->
+<!--				<div><button id="hhh" onclick="aaa()" style="border-radius: 40%; width: 65px; height: 38px;margin-left: 290px;margin-top:-37px" type="button" >关注</button></div>-->
+<!--			</div>-->
+<!--			<div style="height: 70px;width:100%;margin: auto;margin-top: 30p;border: 1px solid #CCCCCC;background-color: white;">-->
+<!--				<div style="margin-left: 55px;margin-top: 12px;">-->
+<!--					<p style="font-size: 16px;font-weight: bold;">我是超级大苏打！</p>-->
+<!--					<p style="font-size: 10px;margin-top: -10px;">生活运动类活跃用户</p>-->
+<!--				</div>-->
+<!--				<div class="div1"><img src="/img/7.jpg" alt="" /></div>-->
+<!--				<div><button id="hhh" onclick="aaa()" style="border-radius: 40%; width: 65px; height: 38px;margin-left: 290px;margin-top:-37px" type="button" >关注</button></div>-->
+<!--			</div>-->
+		</div>
+<script type="text/javascript">
+	// mui(document.body).on('tap', '.mui-btn', function(e) {
+	// 	mui(this).button('loading');
+	// 	setTimeout(function() {
+	// 		mui(this).button('reset');
+	// 	}.bind(this), 2000);
+	// });
+	function aaa(){
+		document.getElementById("hhh").innerHTML="已关注";
+
+	}
+</script></body>
+
+</html>

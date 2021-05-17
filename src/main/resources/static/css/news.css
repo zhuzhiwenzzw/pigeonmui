@@ -1,0 +1,81 @@
+/*头部样式*/
+.mui-bar img{
+	width: 30px;
+	height: 30px;
+	margin-top: 8px;
+}
+.mui-bar h1{
+  font-size: 20px;	
+ 
+}
+#mui-content{
+	background-color:#F9F9F9;
+	width: 100%;
+	height:110px;
+	margin-top: 10%;
+	
+}
+ul li{
+	float: left;
+	margin:35px;
+/*	margin: 20px;*/
+/*	padding: 0px;*/
+    line-height:0px;
+}
+
+ul img{
+	width: 45px;
+	height: 45px;
+}
+ul img:hover{
+	opacity: 0.6;
+}
+.mui-item{
+	margin-left: -25px;
+}
+.mui-item1 li{
+	margin-top: -20px;
+	margin-left:20px;
+/*	margin: 40px;*/
+}
+.mui-item1 a{
+	color: black;
+	font-size: 14px;
+	}
+/*hr{
+	border: 1px solid #CCCCCC;
+	opacity: 0.2;
+	margin-top: -10px;
+
+}*/
+.mui-box2{
+	margin-top: -8px;
+}
+.mui-table-view img{
+	margin-left: 10%;
+	border-radius: 100%;
+/*	margin-top: 2%;*/
+}
+.mui-box2 li{
+	width: 100%;
+	background-color: #F9F9F9;
+	line-height: 20px;
+/*	margin-left: ;*/
+	margin: 0px;
+}
+.mui-table-view:after{
+	top:310px;
+}
+ul.mui-table-view:before{
+	background:  #F9F9F9;
+}
+.mui-table-view p{
+	margin-left: 35%;
+	
+}
+.mui-table-view h5{
+	margin-left: 35%;
+	margin-top: -15%;
+	
+	
+}

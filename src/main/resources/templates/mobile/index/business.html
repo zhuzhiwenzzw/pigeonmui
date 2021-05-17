@@ -1,0 +1,114 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"  charset="UTF-8"/>
+
+	<link rel="stylesheet" type="text/css" href="https://dcloud.io/hellomui/css/app.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/mui.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/business.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/download/font_1592428_zzltoedu34/iconfont.css}"/>
+
+	<style>
+		.iconfont{
+			font-size: 25px;
+			/*	margin-top: 30%;*/
+		}
+		/*.mui-box{*/
+		/*    background: url([[@{/upload/${user.bgImg}}]]);*/
+		/*}*/
+	</style>
+</head>
+
+
+<body>
+<script th:src="@{/js/mui.js}" ></script>
+<script th:src="@{/js/mui.min.js}"></script>
+<script type="text/javascript">
+	mui.init()
+</script>
+<div th:if="${user.authentication}">
+	<div id="mui-content">
+		<!--第一部分有背景图-->
+		<div class="mui-box" th:style="'background-image: url('+@{'/upload/'+${user.bgImg}}+')'">
+			<br>
+			<a th:href="${yemian}"><span class="icon iconfont icon-sanjiaoxing" id="fanhui"></span></a>
+		</div>
+		<!--第二部分关于卡片介绍-->
+		<div class="mui-box1">
+			<ul type="none">
+				<li><img th:src="@{'/upload/'+${user.imgSrc}}"></li>
+				<li><h4 th:text="${user.nickname}">华为</h4></li>
+				<!--            <li><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>关注</p></button></li>-->
+				<a th:if="${!issame}">
+					<li th:if="${guanzhu}"><a th:href="@{|/userInfo/cancelatten/${jiekou}/${user.id}|}" type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>已关注</p></a></li>
+					<li th:if="${!guanzhu}"><a th:href="@{|/userInfo/atten/${jiekou}/${user.id}|}" type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>关注</p></a></li>
+				</a>
+			</ul><br />
+			<ul type="none" class="mui-ul">
+				<li><h5 > 国企业排行16</h5></li>
+				<li><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>联系客户</p></button></li>
+			</ul>
+		</div>
+		<!--详细介绍页面-->
+		<div class="mui-box2">
+			<h4>详情</h4>
+			<p th:text="${user.introduction}">
+				Duis sollicitudin hendrerit magna eu dictum. In at sapien vel nunc maximus dictum. Pellentesque orci quam, volutpat vitae placerat vel, bibendum non tellus. Donec turpis ipsum, porta in nulla ac, scelerisque pretium nulla. Nunc in arcu a lectus tincidunt fringilla vel malesuada felis. Nulla pellentesque
+			</p>
+		</div>
+	</div>
+</div>
+
+<div th:if="${!user.authentication}">
+	<div id="mui-content">
+		<!--第一部分有背景图-->
+		<div class="mui-box">
+<!--		<div class="mui-box" th:style="'background-image: url('+@{'/upload/'+${user.bgImg}}+')'">-->
+			<br>
+			<a th:href="${yemian}"><span class="icon iconfont icon-sanjiaoxing" id="fanhui"></span></a>
+		</div>
+		<!--第二部分关于卡片介绍-->
+		<div class="mui-box1">
+			<ul type="none">
+				<li><img th:src="@{'/upload/'+${user.imgSrc}}"></li>
+				<li><h4 th:text="${user.nickname}">华为</h4></li>
+				<a th:if="${!issame}">
+					<li th:if="${guanzhu}"><a th:href="@{|/userInfo/cancelatten/${jiekou}/${user.id}|}" type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>已关注</p></a></li>
+					<li th:if="${!guanzhu}"><a th:href="@{|/userInfo/atten/${jiekou}/${user.id}|}" type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>关注</p></a></li>
+				</a>
+
+			</ul><br />
+			<ul type="none" class="mui-ul">
+				<li><h5 >个体用户</h5></li>
+<!--				<li><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"><p>联系客户</p></button></li>-->
+			</ul>
+		</div>
+		<div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">手机号:[[${user.phone}]]</li>
+				<li class="mui-table-view-cell">QQ邮箱:[[${user.mailnum}]]</li>
+				<li class="mui-table-view-cell">QQ号:[[${user.qqNumber}]]</li>
+				<li class="mui-table-view-cell">个人说明:</li>
+			</ul>
+		</div>
+
+		<div class="mui-box2">
+<!--			<h4>个人说明</h4>-->
+			<p th:text="${user.information}">
+				Duis sollicitudin hendrerit magna eu dictum. In at sapien vel nunc maximus dictum. Pellentesque orci quam, volutpat vitae placerat vel, bibendum non tellus. Donec turpis ipsum, porta in nulla ac, scelerisque pretium nulla. Nunc in arcu a lectus tincidunt fringilla vel malesuada felis. Nulla pellentesque
+			</p>
+		</div>
+
+	</div>
+</div>
+
+
+<script>
+</script>
+</body>
+
+
+</html>

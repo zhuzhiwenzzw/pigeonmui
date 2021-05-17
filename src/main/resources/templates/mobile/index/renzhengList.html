@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" charset="utf-8" >
+	<title>消息</title>
+<!--	<link rel="stylesheet" href="/css/news.css" />-->
+<!--	<script src="/js/news.js" type="text/javascript" charset="utf-8"></script>-->
+	<script th:replace="common/head::static"></script>
+	<style>
+		.mui-bar h1{
+			font-size: 20px;
+
+		}
+		/*.mui-card-header:after{*/
+		/*	!*top: unset;*!*/
+		/*	!*bottom: revert;*!*/
+		/*}*/
+		.mui-card-header:after, .mui-card-footer:before{
+			right: unset;
+		}
+		.mui-card-media{
+			height: 60px;
+		}
+	</style>
+</head>
+<body>
+<!--头部-->
+<header class="mui-bar mui-bar-nav">
+	<div>
+		<h1 class="mui-title">认证列表</h1>
+				<a href="/index/userpg" type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</a>
+	</div>
+
+</header>
+<!--	主体内容-->
+<div class="mui-page-content" >
+	<div class="mui-scroll-wrapper">
+		<div class="mui-scroll">
+	<!--认证列表-->
+		<p style="margin-top: 60px">待审核列表：</p>
+			<div th:each="userApply:${userApplys}" class="mui-card" id="travel" >
+				<div class="mui-card-header mui-card-media">
+					<img th:src="@{'/upload/'+${userApply.imgSrc}}"  style="height: 45px;width: 45px;"><!--头像-->
+					<div class="mui-media-body" id="mui-top">
+						<div style="width: 80%;float: left">
+							[[${userApply.nickname}]]
+							<p style="padding-top: 2px; width: 80%" th:text="${userApply.information}">认证：青城山管理人员</p>
+						</div>
+
+						<a style="float: right" type="button" class="mui-btn" th:href="@{'/index/renzhengDetail/'+${userApply.id}}" id="toastBtn">查看</a>
+					</div>
+
+				</div>
+			</div>
+		<p>审核通过列表：</p>
+			<div th:each="userPass : ${userPasss}" class="mui-card" id="travel" >
+				<div class="mui-card-header mui-card-media">
+					<img th:src="@{'/upload/'+${userPass.imgSrc}}"  style="height: 45px;width: 45px;"><!--头像-->
+					<div class="mui-media-body" id="mui-top">
+						<div style="width: 80%;float: left">
+							[[${userPass.nickname}]]
+							<!--										青城山风景区-->
+							<!--{{item.nickname}}-->
+							<a th:if="${userPass.authentication}!=false">
+								<img src="/img/renzheng.png" style="height: 16px;width: 16px; padding-bottom: 2px">
+							</a>
+							<p style="padding-top: 2px; width: 80%" th:text="${userPass.information}">认证：青城山管理人员</p>
+						</div>
+
+						<a style="float: right" type="button" th:href="@{'/index/renzhengDetail/'+${userPass.id}}" class="mui-btn" id="toastBtn">查看</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+<script>
+
+</script>
+</html>

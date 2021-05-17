@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/cc.css" />
+		<style>
+		
+		</style>
+	</head> 
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #000000;"></a>
+			<h1 class="mui-title" style="font-size: 20px;">帖子正文</h1>
+		</header>
+		
+		<div class="mui-card" style="margin-top: 50px;">
+			<div class="mui-card-header mui-card-media">
+				<img src="img/cc.png" style="height: 60px;width: 60px;"><!--头像-->
+					<div class="mui-media-body" id="mui-top">
+					青城山风景区
+						<img src="img/renzheng.png" style="height: 16px;width: 16px;">
+						<p style="padding-top: 8px;">认证：青城山管理人员</p>
+						<button type="button" class="mui-btn mui-btn-outlined" onclick="myfunction()" id="toastBtn">关注</button>
+					</div>				
+			</div>
+			<div class="mui-card-content"  style="width: 100%;">
+					
+				<p>来青城山，享受一场视觉盛宴</p>
+				<div class="mui-content-padded" id="neirong-img" >
+					<img src="img/neirong1.jpg" style="width: 32%;"data-preview-src="" data-preview-group="1">
+					<img src="img/neirong2.jpg"style="width: 32%"data-preview-src="" data-preview-group="1">
+					<img src="img/neirong3.jpg"style="width: 32%"data-preview-src="" data-preview-group="1">
+				</div>
+			</div>
+				<div class="mui-card-footer">
+				<a class="mui-card-link">
+					<img src="img/link.png" style="width: 25px; float: left;margin-left: 40px;">
+					<p style="float: left;">22</p>
+				</a>
+				<a class="mui-card-link">
+					<img src="img/message.png" style="width: 25px;margin-left: 10px;float: left;">
+					<p style="float: left;">42</p>
+				</a>
+				<a class="mui-card-link">
+					<img src="img/zan.png" style="width: 25px;float: left;">
+					<p style="float: left;margin-right: 30px;">32</p>
+				</a>
+				</div>
+			</div>
+			<div class="answer">
+				<p style="border-bottom:3px solid #ACB3D7;width: 65px;font-size: 16px;margin-left: 10px;color: #000000;">全部回复</p>
+				
+				<!--内容-->
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="img/neirong2.jpg" style="width: 43px;height: 43px;border-radius: 50%;"/>
+					<div class="mui-media-body"style="margin-top: 6px;">
+						小M
+						<p>2020-06-30 15:30</p>
+					</div>
+					<img src="img/zan.png" style="width: 30px;height: 30px;float: left; margin-top: -30px;margin-left: 270px;" id="good">
+				</div>
+				<div class="mui-card-content" >
+					<p style="margin-top: 5px;">青城山的门票怎么买啊？</p>
+				</div>		
+			</div>
+			<!--内容2-->
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="img/cc.png" style="width: 43px;height: 43px;border-radius: 50%;"/>
+					<div class="mui-media-body" style="margin-top: 6px;" >
+						青城山风景区
+						<p>2020-06-30 15:35</p>
+						<img src="img/renzheng.png" style="height: 16px;width: 16px;position: absolute;margin-top: -35px;margin-left: 90px;">
+					</div>
+					<img src="img/zan.png" style="width: 30px;height: 30px;float: left; margin-top: -30px;margin-left: 270px;" id="good">
+				</div>
+				<div class="mui-card-content" >
+					<p style="margin-top: 5px;">回复:<a href="#">@小M</a>:你好，官方微信公众号和线下都有卖哦</p>
+				</div>
+		
+			</div>
+				
+			</div>
+  
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.zoom.js"></script>
+		<script src="js/mui.previewimage.js"></script>
+		<script>			
+			mui.previewImage();
+			mui.init();			
+   			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+			})
+			
+			
+			
+			
+			
+       </script>
+	</body>
+</html>

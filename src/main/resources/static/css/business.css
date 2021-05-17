@@ -1,0 +1,61 @@
+body{
+	background: white;
+}
+.mui-box{
+	/*border: 1px solid red;*/
+	background-image: url(../img/hbanner-nova6-5g.jpg);
+	width: 100%;
+	height:200px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.mui-box1{
+	border: 1px solid whitesmoke;
+	width: 60%;
+	height: 100px;
+	background:white;
+	margin-left: 20%;
+	margin-top: -15%;
+	border-radius: 5%;
+}
+.mui-box1 img {
+	width:60px;
+	height: 60px;
+	margin-left:-60%;
+}
+.mui-box1 li{
+	float: left;
+}
+.mui-btn-outlined{
+	border-radius:15%;
+	width: 35px;
+	height: 25px;
+	margin-left: 99%;
+	
+	margin-top: 12%;
+	
+}
+.mui-btn-outlined p{
+	font-size:10px;
+	margin-left: -30%;
+	color: blue;
+}
+.mui-ul li{
+	float: left;
+}
+.mui-ul button{
+	width: 60px;
+	margin-left:80%;
+	margin-top: -5%;
+}
+.mui-ul p{
+	margin-left: 1%;
+}
+.mui-ul h5{
+	margin-top: -5%;
+}
+.mui-box2{
+	width: 80%;
+	border: 1px solid whitesmoke;
+	margin-left: 10%;
+}

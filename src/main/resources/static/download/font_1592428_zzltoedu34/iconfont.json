@@ -1,0 +1,51 @@
+{
+  "id": "1592428",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3112681",
+      "name": "头像",
+      "font_class": "male",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "3899563",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "4499709",
+      "name": "地球",
+      "font_class": "diqiuiconsheji_huaban",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "5240571",
+      "name": "三角形",
+      "font_class": "sanjiaoxing",
+      "unicode": "e6d3",
+      "unicode_decimal": 59091
+    },
+    {
+      "icon_id": "10238134",
+      "name": "房子",
+      "font_class": "fangzi1",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "11769009",
+      "name": "消 息1-01",
+      "font_class": "xiaoxi-",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

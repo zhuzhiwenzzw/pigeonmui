@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta  name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" charset="UTF-8">
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		 <script type="text/javascript" src="js/mui.min.js" ></script>
+    	<link href="css/mui.min.css" rel="stylesheet"/>
+    	<link rel="stylesheet" href="download/font_1592428_zzltoedu34/iconfont.css" />
+    	<style>
+    		body{
+    			line-height: 47px;
+    		}
+    		.mui-bar-nav a {
+    		 color:#acb3d7;
+    		
+}
+			.iconfont{
+				font-size:25px;
+				margin-left: 6%;
+			/*	margin-top: 20%;*/
+						}
+			a:hover{
+				opacity: 0.1;
+			}
+			#searchInput{
+				background-color:#acb3d7;
+				width: 200px;
+				margin-left: 25%;
+		/*		margin-top: 10%;*/
+				/*border-radius: 50%;*/
+			}
+			.mui-content{
+				margin-top: 10px;
+			}
+    	</style>
+	</head>
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<a id="fanhui"><span class="icon iconfont icon-sanjiaoxing"></span></a>
+			<h1 class="mui-title">开始探索</h1>
+			
+		</header>
+		  <div class="mui-content">
+        
+        <!-- MUI 搜索框 -->
+        <div class="mui-input-row mui-search" id="searchForm">
+            <input type="search" id="searchInput" onkeyup="enterSearch(event)" class="mui-input-clear" placeholder="搜索关键词">
+        </div>
+        
+    </div>
+    
+    <script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/njs-io.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        mui.init({
+          gestureConfig:{
+           longtap: true //默认为false
+          }
+        });
+        
+        // 搜索事件,获取搜索关键词
+        function enterSearch(event){
+            if(event.keyCode == 13) {//用户点击回车的事件号为13
+                var keyword = document.getElementById('searchInput').value;
+                alert(keyword);
+            }
+        }
+        
+        document.getElementById('fanhui').addEventListener('tap',function(){
+						//alert('test a');
+					mui.openWindow({
+					url:'news.html',	
+					id:'news.html'
+					});
+				});
+        
+    </script>
+
+
+	</body>
+</html>

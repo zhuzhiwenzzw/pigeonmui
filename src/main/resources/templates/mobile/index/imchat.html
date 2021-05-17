@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+<!--		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />-->
+		<title></title>
+		<link href="/css/mui.min.css" rel="stylesheet" />
+<!--		<link rel="stylesheet" type="text/css" href="/css/app.css" />-->
+<!--		<link href="/css/mui.imageviewer.css" rel="stylesheet" />-->
+		<script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
+		<script th:replace="common/head::static"></script>
+		<!-- 引入自定义键盘 -->
+		<link rel='stylesheet' th:href="@{/common/keyboard/keyboard.css}"/>
+		<script th:src="@{/common/keyboard/keyboard.js}"></script>
+		<link href="/css/aa.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/feedback-page.css}" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				overflow: hidden;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+			footer {
+				position: fixed;
+				width: 100%;
+				height: 50px;
+				min-height: 50px;
+				border-top: solid 1px #bbb;
+				left: 0px;
+				bottom: 0px;
+				overflow: hidden;
+				padding: 0px 50px;
+				background-color: #fafafa;
+			}
+			.footer-left {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				left: 0px;
+				bottom: 0px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 100%;
+				padding: 12px 4px;
+			}
+			.footer-right {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				right: 0px;
+				bottom: 0px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 100%;
+				padding: 12px 5px;
+				display: inline-block;
+			}
+			.footer-center {
+				height: 100%;
+				padding: 5px 0px;
+			}
+			.footer-center [class*=input] {
+				width: 100%;
+				height: 100%;
+				border-radius: 5px;
+			}
+			.footer-center .input-text {
+				background: #fff;
+				border: solid 1px #ddd;
+				padding: 10px !important;
+				font-size: 16px !important;
+				line-height: 18px !important;
+				font-family: verdana !important;
+				overflow: hidden;
+			}
+			.footer-center .input-sound {
+				background-color: #eee;
+			}
+			.mui-content {
+				height: 100%;
+				padding: 44px 0px 50px 0px;
+				/*overflow: auto;*/
+				background-color: #eaeaea;
+			}
+			.muicontent {
+				height: 100%;
+				padding: 44px 10px 50px 10px;
+				overflow: auto;
+				background-color: #eaeaea;
+			}
+			#msg-list {
+				height: 100%;
+				overflow: auto;
+				/*-webkit-overflow-scrolling: touch;*/
+			}
+			.msg-item {
+				padding: 8px;
+				clear: both;
+			}
+			.msg-item .mui-item-clear {
+				clear: both;
+			}
+			.msg-item .msg-user {
+				width: 38px;
+				height: 38px;
+				border: solid 1px #d3d3d3;
+				display: inline-block;
+				background: #fff;
+				border-radius: 3px;
+				vertical-align: top;
+				text-align: center;
+				float: left;
+				padding: 3px;
+				color: #ddd;
+			}
+			
+			.msg-item .msg-user-img{
+				width: 38px;
+				height: 38px;
+				display: inline-block;
+				border-radius: 3px;
+				vertical-align: top;
+				text-align: center;
+				float: left;
+				color: #ddd;
+			}
+			
+			.msg-item .msg-content {
+				display: inline-block;
+				border-radius: 5px;
+				border: solid 1px #d3d3d3;
+				background-color: #FFFFFF;
+				color: #333;
+				padding: 8px;
+				vertical-align: top;
+				font-size: 15px;
+				position: relative;
+				margin: 0px 8px;
+				max-width: 75%;
+				min-width: 35px;
+				float: left;
+			}
+			.msg-item .msg-content .msg-content-inner {
+				overflow-x: hidden;
+			}
+			.msg-item .msg-content .msg-content-arrow {
+				position: absolute;
+				border: solid 1px #d3d3d3;
+				border-right: none;
+				border-top: none;
+				background-color: #FFFFFF;
+				width: 10px;
+				height: 10px;
+				left: -5px;
+				top: 12px;
+				-webkit-transform: rotateZ(45deg);
+				transform: rotateZ(45deg);
+			}
+			.msg-item-self .msg-user,
+			.msg-item-self .msg-content {
+				float: right;
+			}
+			.msg-item-self .msg-content .msg-content-arrow {
+				left: auto;
+				right: -5px;
+				-webkit-transform: rotateZ(225deg);
+				transform: rotateZ(225deg);
+			}
+			.msg-item-self .msg-content,
+			.msg-item-self .msg-content .msg-content-arrow {
+				background-color: #4CD964;
+				color: #fff;
+				border-color: #2AC845;
+			}
+			footer .mui-icon {
+				color: #000;
+			}
+			footer .mui-icon:active {
+				color: #007AFF !important;
+			}
+			footer .mui-icon-paperplane:before {
+				content: "发送";
+			}
+			footer .mui-icon-paperplane {
+				/*-webkit-transform: rotateZ(45deg);
+				transform: rotateZ(45deg);*/
+
+				font-size: 16px;
+				word-break: keep-all;
+				line-height: 100%;
+				padding-top: 6px;
+				color: rgba(0, 135, 250, 1);
+			}
+			#msg-sound {
+				-webkit-user-select: none !important;
+				user-select: none !important;
+			}
+			.rprogress {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 140px;
+				height: 140px;
+				margin-left: -70px;
+				margin-top: -70px;
+				background-image: url(../images/arecord.png);
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: 30px 30px;
+				background-color: rgba(0, 0, 0, 0.7);
+				border-radius: 5px;
+				display: none;
+				-webkit-transition: .15s;
+			}
+			.rschedule {
+				background-color: rgba(0, 0, 0, 0);
+				border: 5px solid rgba(0, 183, 229, 0.9);
+				opacity: .9;
+				border-left: 5px solid rgba(0, 0, 0, 0);
+				border-right: 5px solid rgba(0, 0, 0, 0);
+				border-radius: 50px;
+				box-shadow: 0 0 15px #2187e7;
+				width: 46px;
+				height: 46px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -23px;
+				margin-top: -23px;
+				-webkit-animation: spin 1s infinite linear;
+				animation: spin 1s infinite linear;
+			}
+			.r-sigh{
+				display: none;
+				border-radius: 50px;
+				box-shadow: 0 0 15px #2187e7;
+				width: 46px;
+				height: 46px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -23px;
+				margin-top: -23px;
+				text-align: center;
+				line-height: 46px;
+				font-size: 40px;
+				font-weight: bold;
+				color: #2187e7;
+			}
+			.rprogress-sigh{
+				background-image: none !important;
+			}
+			.rprogress-sigh .rschedule{
+				display: none !important;
+			}
+			.rprogress-sigh .r-sigh{
+				display: block !important;
+			}
+			.rsalert {
+				font-size: 12px;
+				color: #bbb;
+				text-align: center;
+				position: absolute;
+				border-radius: 5px;
+				width: 130px;
+				margin: 5px 5px;
+				padding: 5px;
+				left: 0px;
+				bottom: 0px;
+			}
+			@-webkit-keyframes spin {
+				0% {
+					-webkit-transform: rotate(0deg);
+				}
+				100% {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			#h {
+				background: #fff;
+				border: solid 1px #ddd;
+				padding: 10px !important;
+				font-size: 16px !important;
+				font-family: verdana !important;
+				line-height: 18px !important;
+				overflow: visible;
+				position: absolute;
+				left: -1000px;
+				right: 0px;
+				word-break: break-all;
+				word-wrap: break-word;
+			}
+			.cancel {
+				background-color: darkred;
+			}
+		</style>
+		<style>
+			.left {
+				min-width: 40px;
+				max-width: 200px;
+				min-height: 40px;
+				background: whitesmoke;
+				position: relative;
+				border-radius: 10px;
+				margin-left: 20px;
+				padding: 10px;
+				float: left;
+			}
+
+			.left:before {
+				content: "";
+				position: absolute;
+				right: 100%;
+				top: 7px;
+				border-top: 13px solid transparent;
+				border-right: 13px solid whitesmoke;
+				border-bottom: 13px solid transparent;
+			}
+			.right {
+				min-width: 40px;
+				max-width: 200px;
+				min-height: 40px;
+				background: whitesmoke;
+				position: relative;
+				border-radius: 10px;
+				margin-left: 20px;
+				padding: 10px;
+				float: right;
+			}
+
+			.right:before {
+				content: "";
+				position: absolute;
+				left: 100%;
+				top: 7px;
+				border-top: 13px solid transparent;
+				border-left: 13px solid whitesmoke;
+				border-bottom: 13px solid transparent;
+			}
+			.leftdiv{
+				width: 100%;max-width: 300px;min-height: 40px;float: left;margin: 5px;
+			}
+			.leftdiv img{
+				width: 45px;height: 45px; float: left;border-radius: 100%;
+			}
+			.rightdiv{
+				width: 100%;max-width: 300px;min-height: 40px;float: right;margin: 5px;
+			}
+			.rightdiv img{
+				width: 45px;height: 45px; float: right;margin-left: 20px;border-radius: 100%;
+			}
+			#scroll{
+				-webkit-touch-callout: default;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="/index/news" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/attent/${attentUser.id}'|}" class="mui-title" th:text="${attentUser.nickname}" ></h1>
+		</header>
+
+
+		<div  class="mui-content">
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="height: 90%">
+				<div class="mui-scroll" id="scroll">
+					<div th:each="i : ${#numbers.sequence(messagesList.numberOfElements-1,0,-1)}" th:class="${messagesList.content[i].aid == attentUser.id} ? 'rightdiv' : 'leftdiv' ">
+						<!--					[[${messagesList.content[i].aid}]]-->
+						<div th:if="${messagesList.content[i].aid != attentUser.id}">
+							<img th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/attent/${attentUser.id}'|}" th:src="@{'/upload/'+${attentUser.imgSrc}}">
+						</div>
+						<div th:if="${messagesList.content[i].aid == attentUser.id}">
+							<img th:src="@{'/upload/'+${user.imgSrc}}">
+						</div>
+						<div class=""th:class="${messagesList.content[i].aid == attentUser.id} ? 'right' : 'left' "><span th:text="${messagesList.content[i].postMessages}">发生的放开是打发撒的发生发看惊世毒妃教师的开了房</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<form th:action="@{|/news/messagesadd/${attentUser.id}|}"  class="mui-page" method="post">
+			<footer>
+				<div class="footer-left">
+					<i id='msg-image' class="mui-icon mui-icon-camera" style="font-size: 28px;"></i>
+				</div>
+				<div class="footer-center">
+					<textarea name="postMessages" id='msg-text' type="text" class='input-text'></textarea>
+
+				</div>
+				<label for="" class="footer-right">
+					<button type="submit" class='input-sound'>发送</button>
+				</label>
+			</footer>
+		</form>
+		<script src="/js/mui.zoom.js"></script>
+		<script src="/js/mui.previewimage.js"></script>
+		<script src="/js/mui.min.js"></script>
+		<script src="/js/jquery-3.4.1.min.js"></script>
+		<script>
+			// js代码
+			// setTimeout(function () {
+			// 	($('.mui-scroll').children("div:last-child")[0]).scrollIntoView();
+			// },100);
+			$('#pullrefresh').scrollTop($('#pullrefresh')[0].scrollHeight);
+			// $('#msg-list').animate({scrollTop: $('#introPage')[0].scrollHeight}, 800);
+		</script>
+		<!--		<script src="../js/mui.min.js"></script>-->
+		<script>
+			mui.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						contentrefresh: '正在加载...',
+						callback: pulldownRefresh
+					},
+				}
+			});
+
+
+			var number = '[[${messagesList.number}]]'      //当前页码
+			var totalPages = '[[${messagesList.totalPages}]]'  //总页码
+			var size = '[[${messagesList.size}]]'
+			var aid = '[[${attentUser.id}]]'
+			var attimg = '[[${attentUser.imgSrc}]]'
+			var attentUser = '[[attentUser]]'
+			var uid = '[[${user.id}]]'
+			var userimg = '[[${user.imgSrc}]]'
+			console.log(aid,attimg,uid,userimg,number)
+			console.log("messagesList:",'[[${messagesList.size}]]')
+
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				// setTimeout(function() {
+				// 	var table = document.body.querySelector('.mui-table-view');
+				// 	var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				// 	for (var i = cells.length, len = i + 3; i < len; i++) {
+				// 		var li = document.createElement('li');
+				// 		li.className = 'mui-table-view-cell';
+				// 		li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+				// 		//下拉刷新，新纪录插到最前面；
+				// 		table.insertBefore(li, table.firstChild);
+				// 	}
+				// 	mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				// }, 1000);
+
+
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view1');
+					// ajax
+					mui.get('/news/attentionjs/'+aid,{pageNum:parseInt(number)+1},function(data){
+								console.log("data:",data)
+								console.log("data:",data.content.length,totalPages)
+								number = data.number
+						console.log("bijiao:",number,totalPages)
+
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((parseInt(number) >= parseInt(totalPages))); //参数为true代表没有更多数据了。
+
+
+								for (var i = 0, len = data.content.length; i < len; i++) {
+									var aid1 = data.content[i]
+									console.log("aid1:",aid1)
+
+									var div = document.createElement('div');
+
+									if (data.content[i].aid == uid){
+										div.className = 'leftdiv';
+									}else {
+										div.className = 'rightdiv';
+									}
+									var imgstr = "";
+									if (data.content[i].aid != aid){
+										imgstr = `<img onclick="'javascript:window.location.href='/userInfo/ton/attent/${aid}'" src="/upload/${attimg}">`
+									}else {
+										imgstr = `<img src="/upload/${userimg}">`
+									}
+									var divclass = "";
+									if (data.content[i].aid == aid){
+										divclass = `<div class="right"><span>${data.content[i].postMessages}</span></div>`
+									}else {
+										divclass = `<div class="left"><span>${data.content[i].postMessages}</span></div>`
+									}
+
+									div.innerHTML = `${imgstr}${divclass}`;
+									// table.appendChild(div);
+									//下拉刷新，新纪录插到最前面；
+									var table = document.body.querySelector('#scroll');
+									table.insertBefore(div, table.firstChild);
+								}
+
+							},'json'
+
+					);	mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1000);
+			}
+		</script>
+
+	</body>
+
+</html>

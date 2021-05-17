@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+		<title>推荐</title>
+		<script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
+		<script th:replace="common/head::static"></script>
+		<!-- 引入自定义键盘 -->
+		<link rel='stylesheet' th:href="@{/common/keyboard/keyboard.css}"/>
+		<script th:src="@{/common/keyboard/keyboard.js}"></script>
+		<link href="/css/aa.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/feedback-page.css}" />
+	</head>
+	<body>
+
+
+	<div id="pullrefresh1" class="mui-scroll-wrapper">
+		<div class="mui-navbar-inner mui-bar mui-bar-nav">
+<!--			<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">-->
+<!--				<span class="mui-icon mui-icon-left-nav"></span>-->
+<!--			</button>-->
+			<a href="/index/new" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-center mui-title">详情</h1>
+		</div>
+		<div class="mui-scroll" style="margin-top: 40px;height: 100%">
+			<!--內容1-->
+			<div class="mui-table-view mui-table-view1 mui-table-view-chevron" style="height: 100%">
+				<div class="mui-card" id="travel" >
+					<div style="height: 300px;overflow-y: auto">
+						<div class="mui-card-header mui-card-media">
+							<img th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/new/${post.uid}'|}" th:src="@{'/upload/'+${post.uimgSrc}}" style="height: 45px;width: 45px;"><!--头像-->
+							<div class="mui-media-body" id="mui-top">
+								[[${post.username}]]
+								<a th:if="${post.authentication}!=false">
+									<img src="/img/renzheng.png" style="height: 16px;width: 16px;">
+								</a>
+								<p style="padding-top: 2px;" th:text="${post.time}">认证：青城山管理人员</p>
+								<!--										<button type="button" class="mui-btn mui-btn-outlined" onclick="myfunction()" id="toastBtn">关注</button>-->
+							</div>
+						</div>
+						<div class="mui-card-content"  style="width: 100%;">
+
+							<p id="att" th:text="${post.content}">来青城山，享受一场视觉盛宴</p>
+							<div class="mui-content-padded" id="neirong-img">
+								<a th:each="image : ${#strings.arraySplit(post.imgSrc, '|')}">
+									<img th:src="@{'/upload/'+${image}}" style="width: 32%;" data-preview-src="" data-preview-group="1">
+								</a>
+							</div>
+						</div>
+						<div class="mui-card-footer">
+							<a class="mui-card-link">
+								<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">
+								<p style="float: left;">22</p>
+							</a>
+							<a class="mui-card-link">
+								<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">
+								<p style="float: left;">42</p>
+							</a>
+							<a class="mui-card-link"  th:onclick="giveLike([[${post.pid}]])">
+								<img src="/img/zan.png" style="width: 25px;float: left;">
+								<p style="float: left;margin-right: 30px;" th:text="${post.giveLike}" th:id="'p'+${post.pid}">32</p>
+							</a>
+						</div>
+						<form th:action="@{/index/addComment}" method="post">
+							<div class="mui-input-row">
+								<!--						<label>联系电话：</label>-->
+								<input name="content" type="text" class="mui-input-clear" placeholder="回复主贴" style="width: 80%;margin: 3px">
+								<button id='submit' type="submit" class="mui-btn mui-btn-green" style="margin: 3px">提交</button>
+							</div>
+
+							<input name="pid" th:value="${post.pid}" hidden/>
+							<input name="cid" th:value="${post.uid}" hidden/>
+						</form>
+					</div>
+					<div style="height: 400px">
+						<div style="margin: 10px;overflow-y: auto; margin-bottom: 20px;height: 400px">
+							<div th:each="comment : ${commentPage.content}">
+								<div style="width: 100%;">
+									<span style="float: left">[[${comment.unickname}]]回复[[${comment.cnickname}]]:</span>
+									<span style="float: right">[[${comment.time}]]</span>
+								</div><br/>
+
+								<div style="width: 100%">
+									<span style="float: left">[[${comment.content}]]</span>
+									<a style="float: right" th:onclick="huifu([[${comment.id}]])">回复</a>
+								</div><br/>
+								<div style="display: none" th:id="${comment.id}">
+									<input th:id="'content'+${comment.id}" type="text" class="mui-input-clear" th:placeholder="'回复'+${comment.unickname}" style="width: 80%;margin: 3px">
+									<button th:onclick="huifubutten([[${comment.id}]],[[${comment.uid}]])" class="mui-btn mui-btn-green" style="margin: 3px">提交</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	</body>
+
+
+<!--	<script th:src='@{/js/feedback.js}'></script>-->
+<!--	<script th:src="@{/js/feedback-page.js}"></script>-->
+	<script src="/js/mui.zoom.js"></script>
+	<script src="/js/mui.previewimage.js"></script>
+	</body>
+
+<script>
+	// mui('body').on('tap', 'a', function() {
+	// 	this.onclick();
+	// });
+
+	var pid = '[[${post.pid}]]';
+
+	function huifu(commentid) {
+		console.log("commentid:",commentid);
+		var div = document.getElementById(commentid)
+		if (div.style.display=='none'){
+			div.style.display='block';
+		}else {
+			div.style.display='none';
+		}
+	}
+	function huifubutten(cid,uid) {
+		console.log("uid:",uid);
+		var content = document.getElementById("content"+cid).value
+		console.log("content:",content);
+		mui.post('/index/addComment/'+pid,{
+					cid:uid,
+					content:content
+				}
+
+		);
+		location.reload();
+		location.reload();
+	}
+
+	//点赞触发
+	function giveLike(pid) {
+		console.log("pid:",pid);
+
+		mui.get('/index/addgiveLike/'+ pid,function(data){
+					console.log("data:",data);
+					var classid = document.getElementById("p"+pid);
+					console.log("classid:",classid)
+					classid.innerHTML = parseInt(data)
+				},'json'
+		);
+	}
+</script>
+
+
+</html>

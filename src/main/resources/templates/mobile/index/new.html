@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+		<title>推荐</title>
+		<script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
+		<script th:replace="common/head::static"></script>
+		<!-- 引入自定义键盘 -->
+		<link rel='stylesheet' th:href="@{/common/keyboard/keyboard.css}"/>
+		<script th:src="@{/common/keyboard/keyboard.js}"></script>
+		<link href="/css/aa.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/feedback-page.css}" />
+	</head>
+	<body>
+
+	<body>
+	<div class="mui-content">
+		<div id="slider" class="mui-slider mui-fullscreen">
+			<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<div class="mui-scroll" >
+					<!--搜索-->
+<!--					<img src="/img/search.png" style="height: 35px;margin-left: 10px; padding-right: 62px;">-->
+					<img src="" style="height: 35px;margin-left: 50px; padding-right: 62px;">
+					<a style="touch-action: none;" class="mui-control-item mui-active" href="#item1mobile">
+						推荐
+					</a>
+					<a style="touch-action: none;" class="mui-control-item" href="#item2mobile">
+						关注
+					</a>
+
+					<img src="/img/tianjia1.png" style="height: 30px; padding-left: 70px;padding-bottom: 3px;" onclick="HuanziDialog.show('#top')">
+<!--					<img id="tianjia" src="/img/tianjia1.png" style="height: 30px; padding-left: 70px;padding-bottom: 3px;">-->
+					<!--添加-->
+				</div>
+			</div>
+			<div class="mui-slider-group">
+				<div id="item1mobile" data-title="推荐" class="mui-slider-item mui-control-content mui-active">
+					<div id="pullrefresh1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<!--內容1-->
+							<div class="mui-table-view mui-table-view1 mui-table-view-chevron">
+								<div th:each="post:${page.content}" class="mui-card" id="travel" >
+									<div class="mui-card-header mui-card-media">
+										<img th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/new/${post.uid}'|}" th:src="@{'/upload/'+${post.uimgSrc}}" style="height: 45px;width: 45px;"><!--头像-->
+										<div class="mui-media-body" id="mui-top">
+											[[${post.nickname}]]
+											<!--										青城山风景区-->
+											<!--{{item.nickname}}-->
+											<a th:if="${post.authentication}!=false">
+												<img src="/img/renzheng.png" style="height: 16px;width: 16px;">
+											</a>
+											<p style="padding-top: 2px;" th:text="${post.time}">认证：青城山管理人员</p>
+											<!--										<button type="button" class="mui-btn mui-btn-outlined" onclick="myfunction()" id="toastBtn">关注</button>-->
+										</div>
+									</div>
+									<div class="mui-card-content"  style="width: 100%;">
+
+										<p id="att" th:text="${post.content}">来青城山，享受一场视觉盛宴</p>
+										<div class="mui-content-padded" id="neirong-img">
+											<a th:each="image : ${#strings.arraySplit(post.imgSrc, '|')}">
+												<img th:src="@{'/upload/'+${image}}" style="width: 32%;" data-preview-src="" data-preview-group="1">
+											</a>
+
+											<!--										<img src="/img/neirong2.jpg" style="width: 32%" data-preview-src="" data-preview-group="1">-->
+											<!--										<img src="/img/neirong3.jpg" style="width: 32%" data-preview-src="" data-preview-group="1">-->
+										</div>
+									</div>
+									<div class="mui-card-footer">
+										<a class="mui-card-link">
+											<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">
+											<p style="float: left;">22</p>
+										</a>
+										<a class="mui-card-link" th:onclick="'javascript:window.location.href='+@{|'/index/detailPost/${post.pid}'|}">
+											<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">
+											<p style="float: left;" th:text="${post.commentNum}">42</p>
+										</a>
+										<a class="mui-card-link" th:onclick="giveLike([[${post.pid}]])">
+											<img src="/img/zan.png" style="width: 25px;float: left;">
+											<p style="float: left;margin-right: 30px;" th:text="${post.giveLike}" th:id="'p'+${post.pid}">32</p>
+										</a>
+									</div>
+								</div>
+							</div>
+
+
+<!--							&lt;!&ndash;內容2&ndash;&gt;-->
+<!--							<div class="mui-card">-->
+<!--								<div class="mui-card-header mui-card-media">-->
+<!--									<img src="/img/touxiang1.jpeg" style="height: 45px;width: 45px; border-radius: 50%;">&lt;!&ndash;头像&ndash;&gt;-->
+<!--									<div class="mui-media-body" id="mui-top">-->
+<!--										四川旅遊學院-->
+<!--										<img src="/img/renzheng.png" style="height: 16px;width: 16px;">-->
+<!--										<p style="padding-top: 2px;">认证：四川旅遊學院</p>-->
+<!--										<button type="button" class="mui-btn mui-btn-outlined" onclick="myfunction()" id="toastBtn">关注</button>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="mui-card-content"  style="width: 100%;">-->
+
+<!--									<p>與你分享川旅一分鐘</p>-->
+<!--									<div id="neirong-img">-->
+<!--										<img src="/img/nei1.jpg" style="width: 32%;" data-preview-src="" data-preview-group="2">-->
+<!--										<img src="/img/nei2.jpg" style="width: 32%" data-preview-src="" data-preview-group="2">-->
+<!--										<img src="/img/nei3.jpg" style="width: 32%" data-preview-src="" data-preview-group="2">-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="mui-card-footer">-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">-->
+<!--										<p style="float: left;">42</p>-->
+<!--									</a>-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">-->
+<!--										<p style="float: left;">23</p>-->
+<!--									</a>-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/zan.png" style="width: 25px;float: left;">-->
+<!--										<p style="float: left;margin-right: 30px;">65</p>-->
+<!--									</a>-->
+<!--								</div>-->
+<!--							</div>-->
+
+<!--							&lt;!&ndash;內容3&ndash;&gt;-->
+<!--							<div class="mui-card">-->
+<!--								<div class="mui-card-header mui-card-media">-->
+<!--									<img src="/img/touxiang1.jpeg" style="height: 45px;width: 45px; border-radius: 50%;">&lt;!&ndash;头像&ndash;&gt;-->
+<!--									<div class="mui-media-body" id="mui-top">-->
+<!--										四川旅遊學院-->
+<!--										<img src="/img/renzheng.png" style="height: 16px;width: 16px;">-->
+<!--										<p style="padding-top: 2px;">认证：四川旅遊學院</p>-->
+<!--										<button type="button" class="mui-btn mui-btn-outlined" onclick="myfunction()" id="toastBtn">关注</button>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="mui-card-content"  style="width: 100%;">-->
+
+<!--									<p>與你分享川旅一分鐘</p>-->
+<!--									<div id="neirong-img">-->
+<!--										<img src="/img/nei1.jpg" style="width: 32%;" data-preview-src="" data-preview-group="3">-->
+<!--										<img src="/img/nei2.jpg"style="width: 32%" data-preview-src="" data-preview-group="3">-->
+<!--										<img src="/img/nei3.jpg"style="width: 32%" data-preview-src="" data-preview-group="3">-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="mui-card-footer">-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">-->
+<!--										<p style="float: left;">42</p>-->
+<!--									</a>-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">-->
+<!--										<p style="float: left;">23</p>-->
+<!--									</a>-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/zan.png" style="width: 25px;float: left;">-->
+<!--										<p style="float: left;margin-right: 30px;">65</p>-->
+<!--									</a>-->
+<!--								</div>-->
+<!--							</div>-->
+						</div>
+					</div>
+				</div>
+				<div id="item2mobile" data-title="关注" class="mui-slider-item mui-control-content">
+					<div id="pullrefresh2" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<!--內容1-->
+							<div class="mui-table-view mui-table-view2 mui-table-view-chevron">
+								<div th:each="post:${page1.content}" class="mui-card" id="travel" >
+									<div class="mui-card-header mui-card-media">
+										<img th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/new/${post.uid}'|}" th:src="@{'/upload/'+${post.uimgSrc}}" style="height: 45px;width: 45px;"><!--头像-->
+										<div class="mui-media-body" id="mui-top">
+											[[${post.nickname}]]
+											<!--										青城山风景区-->
+											<!--{{item.nickname}}-->
+											<a th:if="${post.authentication}!=false">
+												<img src="/img/renzheng.png" style="height: 16px;width: 16px;">
+											</a>
+											<p style="padding-top: 2px;" th:text="${post.time}">认证：青城山管理人员</p>
+											<!--										<button type="button" class="mui-btn mui-btn-outlined" onclick="myfunction()" id="toastBtn">关注</button>-->
+										</div>
+									</div>
+									<div class="mui-card-content"  style="width: 100%;">
+
+										<p id="att" th:text="${post.content}">来青城山，享受一场视觉盛宴</p>
+										<div class="mui-content-padded" id="neirong-img">
+											<a th:each="image : ${#strings.arraySplit(post.imgSrc, '|')}">
+												<img th:src="@{'/upload/'+${image}}" style="width: 32%;" data-preview-src="" data-preview-group="1">
+											</a>
+
+											<!--										<img src="/img/neirong2.jpg" style="width: 32%" data-preview-src="" data-preview-group="1">-->
+											<!--										<img src="/img/neirong3.jpg" style="width: 32%" data-preview-src="" data-preview-group="1">-->
+										</div>
+									</div>
+
+<!--									<div style="width: 30%;height: 40px;float: left">-->
+<!--										<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">-->
+<!--										<p style="float: left;">22</p>-->
+<!--									</div>-->
+<!--									<div th:onclick="'javascript:window.location.href='+@{|'/index/detailPost/${post.pid}'|}" style="width: 30%;height: 40px;float: left">-->
+<!--										<img  src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">-->
+<!--										<p style="float: left;">41</p>-->
+<!--									</div>-->
+
+
+<!--									<div class="mui-card-header" style="float: left;width: 33%;float: left">-->
+<!--										<a th:href="@{|/index/detailPost/${post.pid}|}">-->
+<!--											<img th:onclick="'javascript:window.location.href='+@{|'/index/detailPost/${post.pid}'|}" src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">-->
+<!--											<p style="float: left;">41</p>-->
+<!--										</a>-->
+<!--									</div>-->
+
+									<div class="mui-card-footer">
+										<a class="mui-card-link">
+											<img src="/img/link.png" style="width: 25px; display: inline-block">
+											<p style=" display: inline-block;">22</p>
+										</a>
+										<a class="mui-card-link" th:onclick="'javascript:window.location.href='+@{|'/index/detailPost/${post.pid}'|}">
+											<img src="/img/message.png" style="width: 25px; display: inline-block;margin-left: 40px;">
+											<p style=" display: inline-block;">42</p>
+										</a>
+										<a class="mui-card-link" th:onclick="giveLike1([[${post.pid}]])">
+											<img src="/img/zan.png" style="width: 25px; display: inline-block;">
+											<p style=" display: inline-block;margin-right: 30px;" th:text="${post.giveLike}" th:id="'pp'+${post.pid}">32</p>
+										</a>
+									</div>
+								</div>
+							</div>
+
+
+
+							<!--關注內容1-->
+
+<!--							<div class="mui-card">-->
+<!--								<div class="mui-card-header mui-card-media">-->
+<!--									<img src="/img/touxiang.jpeg" style="height: 45px;width: 45px; border-radius: 50%;">&lt;!&ndash;头像&ndash;&gt;-->
+<!--									<div class="mui-media-body" id="mui-top">-->
+<!--										人間六月天-->
+
+<!--										<p style="padding-top: 2px;">你是人間六月天</p>-->
+
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="mui-card-content"  style="width: 100%;">-->
+
+<!--									<p>今天天氣真好</p>-->
+<!--									<div id="neirong-img">-->
+<!--										<img src="/img/gneirong.jpg" style="width: 32%;" data-preview-src="" data-preview-group="4">-->
+<!--										<img src="/img/gneirong2.jpg" style="width: 32%" data-preview-src="" data-preview-group="4">-->
+
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="mui-card-footer">-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">-->
+<!--										<p style="float: left;">42</p>-->
+<!--									</a>-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">-->
+<!--										<p style="float: left;">23</p>-->
+<!--									</a>-->
+<!--									<a class="mui-card-link">-->
+<!--										<img src="/img/zan.png" style="width: 25px;float: left;">-->
+<!--										<p style="float: left;margin-right: 30px;">65</p>-->
+<!--									</a>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<p style="margin-top: 20px;text-align: center;">暂时沒有更多了...</p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<!-- 上 -->
+		<div id="top" class="huanzi-dialog huanzi-dialog-top" style="height: 600px">
+			<div style="background-color: #efeff4;width: 100%;height: 40px">
+				<div style="margin: 0 auto; width: 60%;float: right;padding: 6px">
+					<p style="font-size: 20px;margin-left: 10px;float: left">发说说</p>
+<!--					<button style="float: right;border-radius: 6px;margin: 0" type="button" class="mui-btn">发表</button>-->
+				</div>
+			</div>
+
+<!--			<script src="js/mui.min.js"></script>-->
+<!--			<script type="text/javascript">-->
+<!--				mui.init()-->
+<!--			</script>-->
+			<form th:action="@{addPost}"  class="mui-page feedback" method="post" enctype="multipart/form-data">
+				<div class="mui-page-content">
+					<p style="margin-top: 40px;">发表你的看法:</p>
+					<div style="margin-top: 10px;border: 1px solid #CCCCCC;width: 98%;margin-left: 3px;" class="row mui-input-row">
+						<textarea name="content" style="height: 200px;" class="mui-input-clear question" placeholder="有什么新鲜事..."></textarea>
+					</div>
+					<p>发表图片:</p>
+					<div style="width: 98%;border: 1px solid #CCCCCC;margin-left: 3px;">
+						<div id='image-list' class="row image-list">
+<!--							<div class="image-item space">-->
+<!--							 	<div class="image-close">X</div>-->
+<!--								<input type="file" accept="image/*" id="image-1">-->
+<!--							</div>-->
+						</div>
+					</div>
+
+				</div>
+				<div>
+					<button style="margin-top: 30px;margin-left: 0px;" id='submit' type="submit" class="mui-btn mui-btn-green">提交</button>
+				</div>
+			</form>
+			<script th:src='@{/js/feedback.js}'></script>
+			<script th:src="@{/js/feedback-page.js}"></script>
+
+		</div>
+
+
+<!--			<input type="text"-->
+<!--				   data-type="1"-->
+<!--				   maxlength="15"-->
+<!--				   data-assignEventNode="buyMoney"-->
+<!--				   class=" libh_input libh_key_board  mui-btn"-->
+<!--				   style="width: 50%"-->
+<!--				   placeholder="点击打开自定义键盘"-->
+<!--				   readonly-->
+<!--				   autocomplete="off"-->
+<!--				   onclick="window.keyBoard({type: 1,eventNode:this})"-->
+<!--			>-->
+<!--			<input type="text" placeholder="请输入.....">-->
+
+
+<!--			<a>头像</a><img src="" id="userPhoto" onclick="choosePhoto(this)" style="height: 100px;width: 100px"/>-->
+
+<!--			<script src="../js/jquery-3.4.1.min.js" charset="utf-8"></script>-->
+<!--			<script src="../common/mui/js/mui.js" charset="utf-8"></script>-->
+<!--			<script type="text/javascript">-->
+<!--				mui.init();-->
+<!--				function choosePhoto(event) {-->
+<!--					console.log("aaaaaaaaaaaaa")-->
+<!--					if (mui.os.plus) {-->
+<!--						var a = [{-->
+<!--							title: '拍照'-->
+<!--						}, {-->
+<!--							title: '从手机相册选择'-->
+<!--						}];-->
+<!--						plus.nativeUI.actionSheet({-->
+<!--							title: '修改头像',-->
+<!--							cancel: '取消',-->
+<!--							buttons: a-->
+<!--						}, function(b) {-->
+<!--							switch (b.index) {-->
+<!--								case 0:-->
+<!--									break;-->
+
+<!--								case 1:-->
+<!--									//拍照-->
+<!--									getImages(event);-->
+<!--									break;-->
+
+<!--								case 2:-->
+<!--									//打开相册-->
+<!--									galleryImages(event);-->
+<!--									break;-->
+
+<!--								default:-->
+<!--									break;-->
+<!--							}-->
+<!--						}, false);-->
+
+<!--					}-->
+<!--				}-->
+
+<!--				//拍照-->
+<!--				function getImages(event) {-->
+<!--					var mobileCamera = plus.camera.getCamera();-->
+<!--					mobileCamera.captureImage(function(e) {-->
+<!--						plus.io.resolveLocalFileSystemURL(e, function(entry) {-->
+<!--							var path = entry.toLocalURL() + '?version=' + new Date().getTime();-->
+<!--							uploadHeadImg(path, event);-->
+<!--							console.log(path);-->
+<!--						}, function(err) {-->
+<!--							console.log("读取拍照文件错误");-->
+<!--						});-->
+<!--					}, function(e) {-->
+<!--						console.log("er", err);-->
+<!--					}, function() {-->
+<!--						filename: '_doc/head.png';-->
+<!--					});-->
+<!--				}-->
+
+<!--				//本地相册选择-->
+<!--				function galleryImages(event) {-->
+<!--					console.log("你选择了从相册选择");-->
+<!--					plus.gallery.pick(function(a) {-->
+<!--						plus.io.resolveLocalFileSystemURL(a, function(entry) {-->
+<!--							plus.io.resolveLocalFileSystemURL('_doc/', function(root) {-->
+<!--								root.getFile('head.png', {}, function(file) {-->
+<!--									//文件已经存在-->
+<!--									file.remove(function() {-->
+<!--										console.log("文件移除成功");-->
+<!--										entry.copyTo(root, 'head.png', function(e) {-->
+<!--											var path = e.fullPath + '?version=' + new Date().getTime();-->
+<!--											uploadHeadImg(path, event);-->
+<!--										}, function(err) {-->
+<!--											console.log("copy image fail: ", err);-->
+<!--										});-->
+<!--									}, function(err) {-->
+<!--										console.log("删除图片失败：（" + JSON.stringify(err) + ")");-->
+<!--									});-->
+<!--								}, function(err) {-->
+<!--									//打开文件失败-->
+<!--									entry.copyTo(root, 'head.png', function(e) {-->
+<!--										var path = e.fullPath + '?version=' + new Date().getTime();-->
+<!--										uploadHeadImg(path, event);-->
+<!--									}, function(err) {-->
+<!--										console.log("上传图片失败：（" + JSON.stringify(err) + ")");-->
+<!--									});-->
+<!--								});-->
+<!--							}, function(e) {-->
+<!--								console.log("读取文件夹失败：（" + JSON.stringify(err) + ")");-->
+<!--							});-->
+<!--						});-->
+<!--					}, function(err) {-->
+<!--						console.log("读取拍照文件失败: ", err);-->
+<!--					}, {-->
+<!--						filter: 'image'-->
+<!--					});-->
+<!--				};-->
+
+<!--				//上传图片-->
+<!--				function uploadHeadImg(imgPath, event) {-->
+<!--					var hint=document.getElementById('hint');-->
+<!--					hint.style.display="inline-block";-->
+<!--					hint.innerHTML='上传中...';-->
+<!--					hint.style.color="#778899";-->
+<!--					//选中图片之后，头像当前的照片变为选择的照片-->
+<!--					var mainImg = event;-->
+<!--					mainImg.src = imgPath;-->
+
+<!--					var image = new Image();-->
+<!--					image.src = imgPath;-->
+
+<!--					image.onload = function() {-->
+<!--						var path='/api/appUser/uploadCheckPhoto';-->
+<!--						var picNum=event.id;-->
+<!--						var base64 = getBase64Image(image);-->
+<!--						var jsonObj = {-->
+<!--							'token':stateText,-->
+<!--							'picNum':picNum,-->
+
+<!--						}-->
+
+<!--						var url = getApiUrl(path,jsonObj);-->
+<!--						mui.ajax(url,{-->
+<!--							data:{-->
+<!--								'imgDatas':base64-->
+<!--							},-->
+<!--							dataType: 'json', //服务器返回json格式数据-->
+<!--							type: 'post', //HTTP请求类型-->
+<!--							timeout: 25000, //超时时间设置为25秒；-->
+<!--							success: function(data) {-->
+<!--								if (data.code == 0) {-->
+<!--									localStorage.setItem('$head_image',data.src);-->
+<!--									simulateLoading(container,0,100);-->
+<!--									setTimeout(function() {-->
+<!--										//mui.toast(data.msg);-->
+<!--										hint.innerHTML='上传成功';-->
+<!--										hint.style.color="#3CB371";-->
+<!--									},2560);-->
+<!--								}else{-->
+<!--									mui.alert(data.msg);-->
+<!--								}-->
+<!--							},-->
+<!--							error: function(xhr, type, errorThrown) {-->
+<!--								if (type == 'timeout') {-->
+<!--									mui.alert('服务器连接超时，请稍后再试');-->
+<!--								}-->
+<!--							}-->
+<!--						});-->
+<!--					}-->
+<!--				}-->
+
+<!--				//压缩图片转成base64-->
+<!--				function getBase64Image(img) {-->
+<!--					var w = 200-->
+<!--					imgWidth = img.width;-->
+<!--					imgHeight = img.height;-->
+<!--					var canvas = document.createElement("canvas");-->
+<!--					var ctx = canvas.getContext("2d");-->
+<!--					if (Math.max(imgWidth, imgHeight) > w) {-->
+<!--						if (imgWidth > imgHeight) {-->
+<!--							canvas.width = w;-->
+<!--							canvas.height = w * imgHeight / imgWidth;-->
+<!--						} else {-->
+<!--							canvas.height = w;-->
+<!--							canvas.width = w * imgWidth / imgHeight;-->
+<!--						}-->
+<!--					} else {-->
+<!--						canvas.width = imgWidth;-->
+<!--						canvas.height = imgHeight;-->
+<!--					}-->
+<!--					ctx.clearRect(0, 0, canvas.width, canvas.height);-->
+<!--					ctx.drawImage(img, 0, 0, canvas.width, canvas.height);-->
+<!--					var dataUrl = canvas.toDataURL("image/png", 0.8);-->
+<!--					return dataUrl;-->
+<!--				}-->
+<!--			</script>-->
+
+
+		</div>
+
+<!--		&lt;!&ndash; 下 &ndash;&gt;-->
+<!--		<div id="bottom" class="huanzi-dialog huanzi-dialog-bottom" style="height: 250px">-->
+<!--			<h5>我从下边弹出</h5>-->
+<!--		</div>-->
+
+<!--		&lt;!&ndash; 左 &ndash;&gt;-->
+<!--		<div id="left" class="huanzi-dialog huanzi-dialog-left">-->
+<!--			<h5>我从左边弹出</h5>-->
+<!--		</div>-->
+
+<!--		&lt;!&ndash; 右 &ndash;&gt;-->
+<!--		<div id="right" class="huanzi-dialog huanzi-dialog-right">-->
+<!--			<h5>我从右边弹出</h5>-->
+<!--		</div>-->
+
+<!--		&lt;!&ndash; 居中 &ndash;&gt;-->
+<!--		<div id="center" class="huanzi-dialog huanzi-dialog-center" style="width: 65%;height: 30%">-->
+<!--			<h5>我从中间弹出</h5>-->
+<!--		</div>-->
+	<script src="/js/mui.zoom.js"></script>
+	<script src="/js/mui.previewimage.js"></script>
+	<script type="text/javascript">
+		function shi() {
+			console.log("aaaaaaaaaaaa")
+		}
+		
+		
+
+	</script>
+
+	<script>
+		// mui.init({
+		// 	swipeBack: false,
+		// 	pullRefresh: {
+		// 		container: '#pullrefresh1',
+		// 		down: {
+		// 			callback: pulldownRefresh1
+		// 		},
+		// 		up: {
+		// 			contentrefresh: '正在加载...',
+		// 			callback: pullupRefresh1
+		// 		}
+		// 	}
+		// });
+
+		mui('body').on('tap', 'a', function() {
+			this.onclick();
+		});
+
+		//点赞触发
+		function giveLike(pid) {
+			console.log("pid:",pid);
+
+			mui.get('/index/addgiveLike/'+ pid,function(data){
+				console.log("data:",data);
+				var classid = document.getElementById("p"+pid);
+				console.log("classid:",classid)
+				classid.innerHTML = parseInt(data)
+					},'json'
+			);
+		}
+		//点赞触发
+		function giveLike1(pid) {
+			console.log("pid:",pid);
+
+			mui.get('/index/addgiveLike/'+ pid,function(data){
+						console.log("data:",data);
+						var classid = document.getElementById("pp"+pid);
+						console.log("classid:",classid)
+						classid.innerHTML = parseInt(data)
+					},'json'
+			);
+
+		}
+
+		//可多次调用
+		mui("#pullrefresh1").pullRefresh({
+			down: {
+				callback: pulldownRefresh1
+			},
+			up: {
+				contentrefresh: '正在加载...',
+				callback: pullupRefresh1
+			},
+		})
+		//可多次调用
+		mui("#pullrefresh2").pullRefresh({
+			down: {
+				callback: pulldownRefresh2
+			},
+			up: {
+				contentrefresh: '正在加载...',
+				callback: pullupRefresh2
+			},
+		})
+
+		var number = '[[${page.number}]]'      //当前页码
+		var totalPages = '[[${page.totalPages}]]'  //总页码
+		var size = '[[${page.size}]]'
+
+		var number2 = '[[${page1.number}]]'      //当前页码
+		var totalPages2 = '[[${page1.totalPages}]]'  //总页码
+		var size2 = '[[${page1.size}]]'
+
+
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh1() {
+			setTimeout(function() {
+				location.reload();
+				mui('#pullrefresh1').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1000);
+		}
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh1() {
+			setTimeout(function() {
+				var table = document.body.querySelector('.mui-table-view1');
+				// ajax
+				mui.get('/userInfo/new',{pageNum:parseInt(number)+1},function(data){
+							console.log("data:",data.content[0].nickname)
+							console.log("data:",data.number,totalPages)
+							console.log("data:",data)
+					number = data.number
+					mui('#pullrefresh1').pullRefresh().endPullupToRefresh((number == totalPages)); //参数为true代表没有更多数据了。
+
+							for (var i = 0, len = data.size; i < len; i++) {
+								var post = data.content[i]
+								// console.log("post:",post)
+								var imgSrc = post.imgSrc;
+								if (imgSrc == null){
+									imgSrc = "";
+								}
+								console.log("imgSrc",imgSrc)
+								var images = new Array(); //定义一数组
+								images = imgSrc.split("|"); //字符分割
+								// console.log(images)
+								var mainStr = '';
+
+								images.forEach((e) => {  // forEach遍历大数组
+									mainStr += `<a><img src="/upload/${e}" style="width: 32%;" data-preview-src="" data-preview-group="1"></a>`
+								})
+								// console.log("mainStr",mainStr)
+								var renzheng = ''
+								if (post.authentication == true){
+									renzheng = `<img src="/img/renzheng.png" style="height: 16px;width: 16px;">`
+								}
+
+
+
+								var div = document.createElement('div');
+								div.className = 'mui-card';
+								div.innerHTML = `<div class="mui-card-header mui-card-media">
+<img onclick="javascript:window.location.href='/userInfo/ton/new/${post.uid}'" src="/upload/${post.uimgSrc}" style="height: 45px;width: 45px;">
+<div class="mui-media-body" id="mui-top">
+${post.nickname}
+${renzheng}
+<p style="padding-top: 2px;">${post.time}</p>
+</div>
+</div>
+<div class="mui-card-content"  style="width: 100%;">
+<p id="att">${post.content}</p>
+<div class="mui-content-padded" id="neirong-img">${mainStr}
+</div>
+</div>
+<div class="mui-card-footer">
+<a class="mui-card-link">
+<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">
+<p style="float: left;">22</p>
+</a>
+<a class="mui-card-link" onclick="javascript:window.location.href='/index/detailPost/${post.pid}'">
+<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">
+<p style="float: left;">${post.commentNum}</p>
+</a>
+<a class="mui-card-link" onclick="giveLike(${post.pid})">
+<img src="/img/zan.png" style="width: 25px;float: left;">
+<p style="float: left;margin-right: 30px;" id="p${post.pid}">${post.giveLike}</p>
+</a>
+</div>`;
+
+
+								// div.innerHTML = '<div class="mui-card-header mui-card-media">' +
+								// 		'<img onclick="javascript:window.location.href=\'/userInfo/'+post.uid+'\'" src="/upload/'+post.uimgSrc+'" style="height: 45px;width: 45px;">' +
+								// 		'<div class="mui-media-body" id="mui-top">' +
+								// 		'<a if="'+post.authentication+'!=false">' +
+								// 		'<img src="/img/renzheng.png" style="height: 16px;width: 16px;">' +
+								// 		'</a>' +
+								// 		'<p style="padding-top: 2px;">'+post.time+'</p>' +
+								// 		'</div>' +
+								// 		'</div>' +
+								// 		'<div class="mui-card-content"  style="width: 100%;">\n' +
+								// 		'<p id="att"> '+post.content+'</p>\n' +
+								// 		'<div class="mui-content-padded" id="neirong-img">\n' +
+								// 		'<a th:each="image : ${#strings.arraySplit(post.imgSrc, \'|\')}">\n' +
+								// 		'<img th:src="@{\'/upload/\'+${image}}" style="width: 32%;" data-preview-src="" data-preview-group="1">\n' +
+								// 		'</a>\n' +
+								// 		'</div>\n' +
+								// 		'</div>';
+								//下拉刷新，新纪录插到最前面；
+								// table.insertBefore(div, table.firstChild);
+								table.appendChild(div);
+							}
+
+						},'json'
+				);
+
+
+
+
+
+
+			}, 1000);
+		}
+
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh2() {
+			setTimeout(function() {
+				location.reload();
+				mui('#pullrefresh2').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1000);
+		}
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh2() {
+			setTimeout(function() {
+				var table = document.body.querySelector('.mui-table-view2');
+				// ajax
+				mui.get('/userInfo/newn',{pageNum:parseInt(number2)+1},function(data){
+							number2 = data.number
+							console.log("number2:",number2,totalPages2)
+							mui('#pullrefresh2').pullRefresh().endPullupToRefresh((number2 == totalPages2)); //参数为true代表没有更多数据了。
+
+							for (var i = 0, len = data.size; i < len; i++) {
+								var post = data.content[i]
+								// console.log("post:",post)
+								var imgSrc = post.imgSrc;
+								if (imgSrc == null){
+									imgSrc = "";
+								}
+								console.log("imgSrc",imgSrc)
+								var images = new Array(); //定义一数组
+								images = imgSrc.split("|"); //字符分割
+								// console.log(images)
+								var mainStr = '';
+
+								images.forEach((e) => {  // forEach遍历大数组
+									mainStr += `<a><img src="/upload/${e}" style="width: 32%;" data-preview-src="" data-preview-group="1"></a>`
+								})
+								// console.log("mainStr",mainStr)
+
+								var renzheng = ''
+								if (post.authentication == true){
+									renzheng = `<img src="/img/renzheng.png" style="height: 16px;width: 16px;">`
+								}
+
+								var div = document.createElement('div');
+								div.className = 'mui-card';
+								div.innerHTML = `<div class="mui-card-header mui-card-media">
+<img onclick="javascript:window.location.href='/userInfo/ton/new/${post.uid}'" src="/upload/${post.uimgSrc}" style="height: 45px;width: 45px;">
+<div class="mui-media-body" id="mui-top">
+${post.nickname}
+${renzheng}
+<p style="padding-top: 2px;">${post.time}</p>
+</div>
+</div>
+<div class="mui-card-content"  style="width: 100%;">
+<p id="att">${post.content}</p>
+<div class="mui-content-padded" id="neirong-img">${mainStr}
+</div>
+</div>
+<div class="mui-card-footer">
+<a class="mui-card-link">
+<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">
+<p style="float: left;">22</p>
+</a>
+<a class="mui-card-link" onclick="javascript:window.location.href='/index/detailPost/${post.pid}'">
+<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">
+<p style="float: left;">${post.commentNum}</p>
+</a>
+<a class="mui-card-link" onclick="giveLike(${post.pid})">
+<img src="/img/zan.png" style="width: 25px;float: left;">
+<p style="float: left;margin-right: 30px;" id="p${post.pid}">${post.giveLike}</p>
+</a>
+</div>`;
+
+										// div.innerHTML = '<div class="mui-card-header mui-card-media">' +
+										// 		'<img onclick="javascript:window.location.href=\'/userInfo/'+post.uid+'\'" src="/upload/'+post.uimgSrc+'" style="height: 45px;width: 45px;">' +
+										// 		'<div class="mui-media-body" id="mui-top">' +
+										// 		'<a if="'+post.authentication+'!=false">' +
+										// 		'<img src="/img/renzheng.png" style="height: 16px;width: 16px;">' +
+										// 		'</a>' +
+										// 		'<p style="padding-top: 2px;">'+post.time+'</p>' +
+										// 		'</div>' +
+										// 		'</div>' +
+										// 		'<div class="mui-card-content"  style="width: 100%;">\n' +
+										// 		'<p id="att"> '+post.content+'</p>\n' +
+										// 		'<div class="mui-content-padded" id="neirong-img">\n' +
+										// 		'<a th:each="image : ${#strings.arraySplit(post.imgSrc, \'|\')}">\n' +
+										// 		'<img th:src="@{\'/upload/\'+${image}}" style="width: 32%;" data-preview-src="" data-preview-group="1">\n' +
+										// 		'</a>\n' +
+										// 		'</div>\n' +
+										// 		'</div>';
+										//下拉刷新，新纪录插到最前面；
+										// table.insertBefore(div, table.firstChild);
+								table.appendChild(div);
+								}
+
+						},'json'
+				);
+
+			}, 1000);
+		}
+	</script>
+
+	</body>
+
+
+</html>
