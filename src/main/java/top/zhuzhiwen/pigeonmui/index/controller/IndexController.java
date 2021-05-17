@@ -135,11 +135,17 @@ public class IndexController {
         User user1 = userService.findById(user.getId());
         modelAndView.addObject("user",user1);
 
-        int likeHe = postsService.likeHe(user.getId());
+        logger.debug(">>>>>>>>>>>");
+        int likeHe = 0;
+        int fansNum = 0;
+        try {
+            likeHe = postsService.likeHe(user.getId());
+            fansNum = userService.findByAllAttentionMe(user.getId()).size();
+        }catch (Exception e){}
+        logger.debug("likeHe>>>>>>>>>>>"+likeHe);
+        logger.debug("fansNum>>>>>>>>>>>"+fansNum);
         modelAndView.addObject("likeHe",likeHe);
-
-        List<User> users = userService.findByAllAttentionMe(user.getId());
-        modelAndView.addObject("fansNum",users.size());
+        modelAndView.addObject("fansNum",fansNum);
 
         modelAndView.setViewName("index/user");
         logger.debug("进入页面:"+user);
