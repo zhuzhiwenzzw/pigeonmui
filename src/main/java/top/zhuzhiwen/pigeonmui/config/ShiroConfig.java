@@ -114,7 +114,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/common", "anon");
         filterChainDefinitionMap.put("/download", "anon");
         filterChainDefinitionMap.put("/fonts", "anon");
-        filterChainDefinitionMap.put("/download", "anon");
+//        filterChainDefinitionMap.put("/download", "anon");
 //        chains.put("/admin/*","roles[Admin]");
         //配置退出  过滤器，其中的具体的退出代码Shiro已经替我们实现了
 //        filterChainDefinitionMap.put("/logout", "logout");
