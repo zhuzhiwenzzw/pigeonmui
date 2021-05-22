@@ -23,6 +23,10 @@
 				width: 100%;
 				display: block;
 			}
+			.imglb{
+				width: 300px;
+				height: 250px;
+			}
 		</style>
 	</head>
 
@@ -32,19 +36,46 @@
 		<script type="text/javascript">
 			mui.init()
 		</script>
-		<form class="mui-input-group">
-		<div class="mui-input-row mui-search">
-    		<input type="search" class="mui-input-clear" placeholder="搜索你想了解的信息">
-		</div>
-		</form>
-		<div style="height: 200px;width: 340px;border: 1px solid #CCCCCC;background-color: white;margin: auto;margin-top: 15px;border-radius: 8%;">
-			<div style="width: 70%;height: 60px;margin: auto;margin-top: 30px;">
-				<img src="/img/shouye.png"></div>
-			<p align="center" style="padding-top:20px ; font-size: 16px;font-weight: bold;">找寻你向往的旅游圣地！</p>
-			<div class="mui-button-row" style="padding-top: 15px;">
-				<a th:href="@{/index/userpg}" class="mui-btn" style="width: 130px;">开始吧</a>
-			</div>
-		</div>
+
+<header class="mui-bar mui-bar-nav">
+	<div>
+		<h1 class="mui-title">白鸽故事</h1>
+	</div>
+</header>
+
+<!--		<form class="mui-input-group">-->
+<!--		<div class="mui-input-row mui-search">-->
+<!--    		<input type="search" class="mui-input-clear" placeholder="搜索你想了解的信息">-->
+<!--		</div>-->
+<!--		</form>-->
+<!--<div style="margin-top: 50px"></div>-->
+<!--		<div style="height: 200px;width: 340px;border: 1px solid #CCCCCC;background-color: white;margin: auto;margin-top: 15px;border-radius: 8%;">-->
+<!--			<div style="width: 70%;height: 60px;margin: auto;margin-top: 30px;">-->
+<!--				<img src="/img/shouye.png"></div>-->
+<!--			<p align="center" style="padding-top:20px ; font-size: 16px;font-weight: bold;">找寻你向往的旅游圣地！</p>-->
+<!--			<div class="mui-button-row" style="padding-top: 15px;">-->
+<!--				<a th:href="@{/index/userpg}" class="mui-btn" style="width: 130px;">开始吧</a>-->
+<!--			</div>-->
+<!--		</div>-->
+
+<div class="mui-slider">
+	<div class="mui-slider-group mui-slider-loop">
+		<!--支持循环，需要重复图片节点-->
+		<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="/img/bg4.png" /></a></div>
+		<div class="mui-slider-item"><a href="#"><img class="imglb" src="/img/bg1.png" /></a></div>
+		<div class="mui-slider-item"><a href="#"><img class="imglb" src="/img/bg2.png" /></a></div>
+		<div class="mui-slider-item"><a href="#"><img class="imglb" src="/img/bg3.png" /></a></div>
+		<div class="mui-slider-item"><a href="#"><img class="imglb" src="/img/bg4.png" /></a></div>
+		<!--支持循环，需要重复图片节点-->
+		<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="/img/bg1.png" /></a></div>
+	</div>
+</div>
+
+<p align="center" style="padding-top:20px ; font-size: 16px;font-weight: bold;">找寻你向往的旅游圣地！</p>
+<div class="mui-button-row" style="padding-top: 15px;">
+<!--	<a th:href="@{/index/userpg}" class="mui-btn" style="width: 130px;">开始吧</a>-->
+</div>
+
 		<div style="margin-top: 20px;">
 			<p style="font-size: 18px;">你可能感兴趣的人：</p>
 		</div>
@@ -101,6 +132,12 @@
 		document.getElementById("hhh").innerHTML="已关注";
 
 	}
+
+	//获得slider插件对象
+	var gallery = mui('.mui-slider');
+	gallery.slider({
+		interval:1000//自动轮播周期，若为0则不自动播放，默认为0；
+	});
 </script></body>
 
 </html>
