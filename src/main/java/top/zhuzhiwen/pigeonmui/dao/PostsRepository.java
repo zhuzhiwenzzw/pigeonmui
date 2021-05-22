@@ -38,7 +38,7 @@ public interface PostsRepository extends BaseRepository<Posts,Integer>, JpaSpeci
     @Query("select new top.zhuzhiwen.pigeonmui.model.DTO.UserPostDto(p.pid,p.uid,u.username,u.nickname,p.time,p.oid,p.content,p.imgSrc,u.imgSrc,u.authentication,u.information,p.giveLike) from Posts p left join  User u on p.uid = u.id order by p.time desc")
     Page<UserPostDto> findAllorderby(Pageable pageable);
 
-    @Query("select new top.zhuzhiwen.pigeonmui.model.DTO.UserPostDto(p.pid,p.uid,u.username,u.nickname,p.time,p.oid,p.content,p.imgSrc,u.imgSrc,u.authentication,u.information,p.giveLike) from Posts p , User u , Attention a where a.aid = u.id and u.id = p.uid and a.uid = ?1 order by p.time desc")
+    @Query("select new top.zhuzhiwen.pigeonmui.model.DTO.UserPostDto(p.pid,p.uid,u.username,u.nickname,p.time,p.oid,p.content,p.imgSrc,u.imgSrc,u.authentication,u.information,p.giveLike) from Posts p , User u , Attention a where a.aid = u.id and u.id = p.uid and a.isattent = true and a.uid = ?1 order by p.time desc")
     Page<UserPostDto> findAllorderbyAttend(int id, Pageable pageable);
 
     @Query("select new top.zhuzhiwen.pigeonmui.model.DTO.UserPostDto(p.pid,p.uid,u.username,u.nickname,p.time,p.oid,p.content,p.imgSrc,u.imgSrc,u.authentication,u.information,p.giveLike) from Posts p , User u where p.uid = u.id and p.pid = ?1")

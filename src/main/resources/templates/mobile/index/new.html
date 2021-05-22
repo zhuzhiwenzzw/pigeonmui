@@ -212,18 +212,33 @@
 <!--										</a>-->
 <!--									</div>-->
 
+<!--									<div class="mui-card-footer">-->
+<!--										<a class="mui-card-link">-->
+<!--											<img src="/img/link.png" style="width: 25px; display: inline-block">-->
+<!--											<p style=" display: inline-block;">22</p>-->
+<!--										</a>-->
+<!--										<a class="mui-card-link" th:onclick="'javascript:window.location.href='+@{|'/index/detailPost/${post.pid}'|}">-->
+<!--											<img src="/img/message.png" style="width: 25px; display: inline-block;margin-left: 40px;">-->
+<!--											<p style=" display: inline-block;">42</p>-->
+<!--										</a>-->
+<!--										<a class="mui-card-link" th:onclick="giveLike1([[${post.pid}]])">-->
+<!--											<img src="/img/zan.png" style="width: 25px; display: inline-block;">-->
+<!--											<p style=" display: inline-block;margin-right: 30px;" th:text="${post.giveLike}" th:id="'pp'+${post.pid}">32</p>-->
+<!--										</a>-->
+<!--									</div>-->
+
 									<div class="mui-card-footer">
 										<a class="mui-card-link">
-											<img src="/img/link.png" style="width: 25px; display: inline-block">
-											<p style=" display: inline-block;">22</p>
+											<img src="/img/link.png" style="width: 25px; float: left;margin-left: 40px;">
+											<p style="float: left;">22</p>
 										</a>
 										<a class="mui-card-link" th:onclick="'javascript:window.location.href='+@{|'/index/detailPost/${post.pid}'|}">
-											<img src="/img/message.png" style="width: 25px; display: inline-block;margin-left: 40px;">
-											<p style=" display: inline-block;">42</p>
+											<img src="/img/message.png" style="width: 25px;margin-left: 10px;float: left;">
+											<p style="float: left;" th:text="${post.commentNum}">42</p>
 										</a>
 										<a class="mui-card-link" th:onclick="giveLike1([[${post.pid}]])">
-											<img src="/img/zan.png" style="width: 25px; display: inline-block;">
-											<p style=" display: inline-block;margin-right: 30px;" th:text="${post.giveLike}" th:id="'pp'+${post.pid}">32</p>
+											<img src="/img/zan.png" style="width: 25px;float: left;">
+											<p style="float: left;margin-right: 30px;" th:text="${post.giveLike}" th:id="'pp'+${post.pid}">32</p>
 										</a>
 									</div>
 								</div>
