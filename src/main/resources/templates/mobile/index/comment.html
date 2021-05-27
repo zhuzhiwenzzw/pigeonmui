@@ -37,6 +37,7 @@
 							<img th:onclick="'javascript:window.location.href='+@{|'/userInfo/ton/new/${post.uid}'|}" th:src="@{'/upload/'+${post.uimgSrc}}" style="height: 45px;width: 45px;"><!--头像-->
 							<div class="mui-media-body" id="mui-top">
 								[[${post.nickname}]]
+
 								<a th:if="${post.authentication}!=false">
 									<img src="/img/renzheng.png" style="height: 16px;width: 16px;">
 								</a>
